@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  background: hsl(var(--bg));
+  transition: background 0.2s;
+}
+
+:root {
+  --bg: 0 0% 98%;
+  --color: 0 0% 22%;
+  --size: 25vmin;
+  --point: 86.6025403784;
+  --offset: calc((100 - var(--point)) * 0.5);
+}
+
+.t {
+  width: var(--size);
+  aspect-ratio: 1;
+  background-color: hsl(var(--color));
+  clip-path: polygon(
+    0 calc((100 - var(--offset)) * 1%),
+    50% calc(var(--offset) * 1%),
+    100% calc((100 - var(--offset)) * 1%)
+  );
+  transition: background 0.2s;
+}
+.wrapper {
+  transition: all 0.2s;
+  filter:
+    drop-shadow(0 0 calc(var(--size) * 0.125) hsl(0 0% 90%))
+    drop-shadow(0 0 calc(var(--size) * 0.45) hsl(0 0% 40%))
+    drop-shadow(0 0 calc(var(--size) * 0.5) hsl(0 0% 50%))
+    ;
+}
+
+@media(prefers-color-scheme: dark) {
+  :root {
+    --bg: 0 0% 2%;
+    --color: 0 0% 6%;
+  }
+  .wrapper {
+      filter:
+        drop-shadow(0 0 calc(var(--size) * 0.125) hsl(0 0% 90%))
+        drop-shadow(0 0 calc(var(--size) * 0.45) hsl(0 0% 40%))
+        drop-shadow(0 0 calc(var(--size) * 0.5) hsl(0 0% 50%))
+        ;
+  }
+}
+
+@supports (calc(pow(2, 2))) {
+  :root {
+    --point: calc(sqrt(pow(100, 2) - pow(50, 2)));
+    --offset: calc((100 - var(--point)) * 0.5);
+  }
+}
